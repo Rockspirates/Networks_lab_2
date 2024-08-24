@@ -33,7 +33,7 @@ def mod2div(dividend, divisor):
     
     return tmp
 
-def crc_encode(data, generator):
+def crc_encode(data, generator = "1000000000000101"):
     # Append zeros to the data string, length of generator minus 1
     appended_data = data + '0' * (len(generator) - 1)
     print(appended_data)
@@ -42,15 +42,3 @@ def crc_encode(data, generator):
     # The final CRC is the remainder of the division
     crc = remainder
     return crc
-
-# Inputs
-# generator = input("Enter CRC Generator (binary): ")
-# message = input("Enter the Message String (binary): ")
-generator = "1000000000000101"
-message = "11000000101011011110"
-
-# Calculating CRC
-crc = crc_encode(message, generator)
-
-# Output the CRC
-print("Calculated CRC:", crc)

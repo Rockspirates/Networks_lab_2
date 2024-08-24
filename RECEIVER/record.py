@@ -2,14 +2,18 @@ import pyaudio
 import wave
 from array import array
 from struct import pack
+import warnings
 
+warnings.filterwarnings("ignore")
 
-def record(outputfile):
+def record(outputfile = 'output.wav'):
     chunk = 1024
     format = pyaudio.paInt16
     channels = 2
     rate = 44100 #in hertz
-    duration = ((4+20)*0.25) #5 seconds
+    padding_len = 4
+    bit_len = 20
+    duration = ((padding_len+bit_len)*0.25) #5 seconds
     p = pyaudio.PyAudio()
     stream = p.open(format=format,
                     channels=channels,
@@ -32,4 +36,3 @@ def record(outputfile):
     wf.writeframes(b"".join(frames))
     wf.close()
 
-record("output.wav")
